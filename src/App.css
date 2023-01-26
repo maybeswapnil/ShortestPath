@@ -89,7 +89,7 @@ button {
 
 @media (max-width: 980px) {
   #header {
-    margin-top: 30px;
+    margin-top: 50px;
   }
   body {
     height: 85vh;
