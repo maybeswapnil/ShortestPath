@@ -91,6 +91,9 @@ button {
   #header {
     margin-top: 0px;
   }
+  body {
+    height: 100vh;
+  }
 }
 
 .button-dev {
