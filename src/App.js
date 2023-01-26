@@ -120,7 +120,7 @@ function App() {
     return () => clearInterval(interval);
   }, []);
 
-  const { height, width } = useWindowDimensions()
+  const { height, width } = useWindowDimensions();
 
   const [count, setCount] = useState(0);
   const [paint, setPaint] = useState(false);
@@ -160,10 +160,16 @@ function App() {
 
   return (
     <div>
-      <div id='header'>
+      <div id="header">
         <h1>Very Short Path</h1>
       </div>
-      <div className="board" style={{gridTemplateColumns: `repeat(${col}, 1fr)`, gridTemplateRows: `repeat(${row}, 1fr)`}}>
+      <div
+        className="board"
+        style={{
+          gridTemplateColumns: `repeat(${col}, 1fr)`,
+          gridTemplateRows: `repeat(${row}, 1fr)`,
+        }}
+      >
         {grid.map((r, i) => {
           return r.map((e, j) => {
             if (e === 1) {
@@ -266,29 +272,32 @@ function App() {
         })}
       </div>
       <br />
-      <button
-        className="button"
-        onClick={() => {
-          calculate();
-        }}
-      >
-        Calculate
-      </button>
-      <button
-        className="button"
-        onClick={() => {
-          setStart([99, 99]);
-          setEnd([99, 99]);
-          setCount(0);
-          setGrid(
-            Array(row)
-              .fill(1)
-              .map((x) => Array(col).fill(1))
-          );
-        }}
-      >
-        Clear
-      </button>
+      <div className="button-dev">
+        <button
+          className="button"
+          onClick={() => {
+            calculate();
+          }}
+        >
+          Calculate
+        </button>
+        <button
+          className="button"
+          onClick={() => {
+            setStart([99, 99]);
+            setEnd([99, 99]);
+            setCount(0);
+            setGrid(
+              Array(row)
+                .fill(1)
+                .map((x) => Array(col).fill(1))
+            );
+          }}
+        >
+          Clear
+        </button>
+      </div>
+
       {/* <div>
       width: {width} ~ height: {height}
     </div> */}
