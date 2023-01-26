@@ -129,21 +129,48 @@ function App() {
   const [end, setEnd] = useState([99, 99]);
 
   const [row, setRows] = useState(20);
-  const [col, setCol] = useState(50);
+  const [col, setCol] = useState(() => {
+    if (width < 1500 && width > 1200) return 30;
+    else if(width>1500) return 50;
+    else return 10;
+  });
+
+  useEffect(() => {
+    if (width < 1500 && width > 1200) {
+      setCol(30);
+      setRows(20);
+      setGrid(
+        Array(row)
+          .fill(1)
+          .map((x) => Array(col).fill(1))
+      );
+      setFlag(!flag);
+    } else if(width>1500) {
+      setCol(50);
+      setRows(20);
+      setGrid(
+        Array(row)
+          .fill(1)
+          .map((x) => Array(col).fill(1))
+      );
+      setFlag(!flag);
+    } else {
+      setCol(10);
+      setRows(20);
+      setGrid(
+        Array(row)
+          .fill(1)
+          .map((x) => Array(col).fill(1))
+      );
+      setFlag(!flag);
+    }
+  }, []);
+
   const [grid, setGrid] = useState(
     Array(row)
       .fill(1)
       .map((x) => Array(col).fill(1))
   );
-
-  // useEffect(() => {
-  //   console.log('asdasdasdasd')
-  //     if(height<1500 && height>1200) {
-  //       setCol(10);
-  //       setRows(10);
-  //       setFlag(!flag);
-  //     }
-  // }, []);
 
   const refresh = ([i, j]) => {
     let c = count;
@@ -162,6 +189,7 @@ function App() {
     <div>
       <div id="header">
         <h1>Very Short Path</h1>
+        <p>&nbsp; found by Swapnil</p>
       </div>
       <div
         className="board"
