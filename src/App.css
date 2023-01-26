@@ -87,7 +87,10 @@ button {
   align-items: baseline;
 }
 
-#header p {
+@media (max-width: 980px) {
+  #header {
+    margin-top: 0px;
+  }
 }
 
 .button-dev {
