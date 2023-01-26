@@ -81,13 +81,6 @@ function App() {
         lastStep = path[lastStep[0] + "," + lastStep[1]].split(",").map(Number);
       else break;
     }
-    // console.log(result);
-    // console.log("Shortest distance: " + shortest);
-
-    // for (let i = 0; i < result.length; i++) {
-    //   if (start.join(",") !== result[i] && end.join(",") !== result[i])
-    //     grid[result[i].split(",")[0]][result[i].split(",")[1]] = "v";
-    // }
 
     var i = 0; //  set your counter to 1
 
@@ -127,11 +120,12 @@ function App() {
   const [flag, setFlag] = useState(true);
   const [start, setStart] = useState([99, 99]);
   const [end, setEnd] = useState([99, 99]);
+  const [view, setView] = useState(false);
 
   const [row, setRows] = useState(20);
   const [col, setCol] = useState(() => {
     if (width < 1500 && width > 1200) return 30;
-    else if(width>1500) return 50;
+    else if (width > 1500) return 50;
     else return 10;
   });
 
@@ -145,7 +139,7 @@ function App() {
           .map((x) => Array(col).fill(1))
       );
       setFlag(!flag);
-    } else if(width>1500) {
+    } else if (width > 1500) {
       setCol(50);
       setRows(20);
       setGrid(
@@ -187,9 +181,27 @@ function App() {
 
   return (
     <div>
+        <div>
+          <div id="popup1" class="overlay">
+            <div class="popup">
+              <h2>Hey</h2>
+              <a class="close" href="#">
+                &times;
+              </a>
+              <div class="content">
+                Developed by Swapnil. <br /><br />Dijkstra's Algorithm finds the shortest path between a given node (which is called the "source node") and all other nodes in a graph.<br/>This algorithm uses the weights of the edges to find the path that minimizes the total distance (weight) between the source node and all other nodes.
+              </div>
+            </div>
+          </div>
+        </div>
       <div id="header">
         <h1>Very Short Path</h1>
-        <p>&nbsp; found by Swapnil</p>
+        <p>
+          &nbsp; found by Swapnil
+          <a className="box" id="info" href="#popup1">
+            ⓘ
+          </a>
+        </p>
       </div>
       <div
         className="board"
@@ -286,17 +298,27 @@ function App() {
 
             if (e == "v")
               return (
-                <button className="element" id="visited" key={i + "-" + j} onClick={() => {
-                  refresh([i, j]);
-                }}>
+                <button
+                  className="element"
+                  id="visited"
+                  key={i + "-" + j}
+                  onClick={() => {
+                    refresh([i, j]);
+                  }}
+                >
                   {}
                 </button>
               );
             if (e == "p")
               return (
-                <button className="element" id="path" key={i + "-" + j} onClick={() => {
-                  refresh([i, j]);
-                }}>
+                <button
+                  className="element"
+                  id="path"
+                  key={i + "-" + j}
+                  onClick={() => {
+                    refresh([i, j]);
+                  }}
+                >
                   {}
                 </button>
               );
@@ -333,7 +355,7 @@ function App() {
       {/* <div>
       width: {width} ~ height: {height}
     </div> */}
-    <br />
+      <br />
     </div>
   );
 }
