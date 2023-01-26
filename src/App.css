@@ -87,12 +87,21 @@ button {
   align-items: baseline;
 }
 
+body {
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
 @media (max-width: 980px) {
+  body {
+    overflow-y: auto; /* Hide vertical scrollbar */
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+  }
   #header {
-    margin-top: 50px;
+    margin-top: 0px;
   }
   body {
-    height: 85vh;
+    height: 100vh;
   }
 }
 
@@ -189,7 +198,4 @@ a {
   }
 }
 
-body {
-  overflow-y: hidden; /* Hide vertical scrollbar */
-  overflow-x: hidden; /* Hide horizontal scrollbar */
-}
+

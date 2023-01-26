@@ -198,7 +198,7 @@ function App() {
         <h1>Very Short Path</h1>
         <p>
           &nbsp; found by Swapnil
-          <a className="box" id="info" href="#popup1">
+          <a id="info" href="#popup1">
             ⓘ
           </a>
         </p>
