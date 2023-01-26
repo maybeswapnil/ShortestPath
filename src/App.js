@@ -286,13 +286,17 @@ function App() {
 
             if (e == "v")
               return (
-                <button className="element" id="visited" key={i + "-" + j}>
+                <button className="element" id="visited" key={i + "-" + j} onClick={() => {
+                  refresh([i, j]);
+                }}>
                   {}
                 </button>
               );
             if (e == "p")
               return (
-                <button className="element" id="path" key={i + "-" + j}>
+                <button className="element" id="path" key={i + "-" + j} onClick={() => {
+                  refresh([i, j]);
+                }}>
                   {}
                 </button>
               );
