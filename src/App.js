@@ -1,6 +1,7 @@
 import logo from "./logo.svg";
 import "./App.css";
 import { useEffect, useState } from "react";
+import useWindowDimensions from "./useWindowDimensions";
 
 function App() {
   class PriorityQueue {
@@ -83,27 +84,66 @@ function App() {
     // console.log(result);
     // console.log("Shortest distance: " + shortest);
 
-    for (let i = 0; i < result.length; i++) {
-      if (start.join(",") !== result[i] && end.join(",") !== result[i])
-        grid[result[i].split(",")[0]][result[i].split(",")[1]] = "v";
+    // for (let i = 0; i < result.length; i++) {
+    //   if (start.join(",") !== result[i] && end.join(",") !== result[i])
+    //     grid[result[i].split(",")[0]][result[i].split(",")[1]] = "v";
+    // }
+
+    var i = 0; //  set your counter to 1
+
+    function myLoop() {
+      //  create a loop function
+      setTimeout(function () {
+        //  call a 3s setTimeout when the loop is called
+        if (start.join(",") !== result[i] && end.join(",") !== result[i])
+          grid[result[i].split(",")[0]][result[i].split(",")[1]] = "v";
+        i++; //  increment the counter
+        setGrid(grid);
+        setFlag(!flag);
+        if (i < result.length) {
+          //  if the counter < 10, call the loop function
+          myLoop(); //  ..  again which will trigger another
+        } //  ..  setTimeout()
+      }, 30);
     }
 
-    setGrid(grid);
-    setFlag(!flag);
+    myLoop();
   };
 
-  const [grid, setGrid] = useState(
-    Array(20)
-      .fill(1)
-      .map((x) => Array(20).fill(1))
-  );
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date());
+    }, 10);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const { height, width } = useWindowDimensions()
+
   const [count, setCount] = useState(0);
   const [paint, setPaint] = useState(false);
   const [flag, setFlag] = useState(true);
   const [start, setStart] = useState([99, 99]);
   const [end, setEnd] = useState([99, 99]);
 
-  useEffect(() => {}, []);
+  const [row, setRows] = useState(20);
+  const [col, setCol] = useState(50);
+  const [grid, setGrid] = useState(
+    Array(row)
+      .fill(1)
+      .map((x) => Array(col).fill(1))
+  );
+
+  // useEffect(() => {
+  //   console.log('asdasdasdasd')
+  //     if(height<1500 && height>1200) {
+  //       setCol(10);
+  //       setRows(10);
+  //       setFlag(!flag);
+  //     }
+  // }, []);
 
   const refresh = ([i, j]) => {
     let c = count;
@@ -120,7 +160,10 @@ function App() {
 
   return (
     <div>
-      <div className="board">
+      <div id='header'>
+        <h1>Very Short Path</h1>
+      </div>
+      <div className="board" style={{gridTemplateColumns: `repeat(${col}, 1fr)`, gridTemplateRows: `repeat(${row}, 1fr)`}}>
         {grid.map((r, i) => {
           return r.map((e, j) => {
             if (e === 1) {
@@ -223,7 +266,6 @@ function App() {
         })}
       </div>
       <br />
-      <br />
       <button
         className="button"
         onClick={() => {
@@ -238,13 +280,18 @@ function App() {
           setStart([99, 99]);
           setEnd([99, 99]);
           setCount(0);
-          setGrid(Array(20)
-          .fill(1)
-          .map((x) => Array(20).fill(1)));
+          setGrid(
+            Array(row)
+              .fill(1)
+              .map((x) => Array(col).fill(1))
+          );
         }}
       >
         Clear
       </button>
+      {/* <div>
+      width: {width} ~ height: {height}
+    </div> */}
     </div>
   );
 }
