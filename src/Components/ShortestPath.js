@@ -21,7 +21,7 @@ class PriorityQueue {
   }
 }
 
-const shortestPath = (grid, setGrid, start, end) => {
+const shortestPath = (grid, setGrid, start, end, setTime) => {
   let n = grid.length;
   let m = grid[0].length;
   let heap = new PriorityQueue();
@@ -85,6 +85,7 @@ const shortestPath = (grid, setGrid, start, end) => {
         grid[result[i].split(",")[0]][result[i].split(",")[1]] = "v";
       i++; // increment the counter
       setGrid(grid);
+      setTime(new Date());
       if (i < result.length) {
         // if the counter < 10, call the loop function
         myLoop(); // ..  again which will trigger another

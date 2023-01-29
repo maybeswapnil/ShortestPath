@@ -10,13 +10,13 @@ import shortestPath from "./Components/ShortestPath";
 function App() {
   const [time, setTime] = useState(new Date());
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTime(new Date());
-    }, 10);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setTime(new Date());
+  //   }, 10);
 
-    return () => clearInterval(interval);
-  }, []);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   const { height, width } = useWindowDimensions();
 
@@ -64,7 +64,7 @@ function App() {
           setStart: setStart,
           setEnd: setEnd,
           setGrid: setGrid,
-          calculate: () => shortestPath(grid, setGrid, start, end),
+          calculate: () => shortestPath(grid, setGrid, start, end, setTime),
           row: row,
           col: col,
         }}
