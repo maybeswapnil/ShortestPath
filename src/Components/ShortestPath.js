@@ -41,8 +41,10 @@ const shortestPath = (grid, setGrid, start, end, setTime) => {
   while (!heap.isEmpty()) {
     let [cost, x, y] = heap.remove();
     visited[x][y] = true;
-    if ((x !== start[0] || y !== start[1]) && (x !== end[0] || y !== end[1]))
-      grid[x][y] = "p";
+    if ((x !== start[0] || y !== start[1]) && (x !== end[0] || y !== end[1])) {
+        grid[x][y] = "p";
+        setTime(new Date());
+    }
 
     for (let [dx, dy] of directions) {
       let i = x + dx;
